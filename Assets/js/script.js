@@ -37,7 +37,7 @@ for (let index = 0; index < 24; index++) {
     }
 
     //Disables non working hours
-    if(dateHour < moment("08:00:00", "h:mm:ss") || dateHour > moment("17:00:00", "h:mm:ss") )
+    if(dateHour < moment() || dateHour < moment("08:00:00", "h:mm:ss") || dateHour > moment("17:00:00", "h:mm:ss") )
     {
     
         inputBlocked = "#inputTask"+index;
@@ -46,10 +46,21 @@ for (let index = 0; index < 24; index++) {
         saveBlocked = "#saveTask"+index;
         $(saveBlocked).parent().attr("style","pointer-events: none");
 
-        taskEl.attr('style','background-color: #7F7F7F;');
+        //DIfferent styling for passed hours and non working hours
+        if(dateHour < moment()){
 
+            taskEl.attr('style','background-color: #6D6A6A;');
+            
+        }
+        else{
+
+        
+            taskEl.attr('style','background-color: #B9B5B5;');
+        }
     }
 
+
+    
     //Change index
     dateHour = dateHour.add(1, "hours");
 
@@ -77,6 +88,9 @@ saveEl.on('click', function () {
     else{
         taskEl.attr('style','background-color: #33FF7A;');
     }
+
+    //Validates if the hour has passed
+    
 
 });
 
